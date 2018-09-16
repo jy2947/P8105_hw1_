@@ -25,12 +25,25 @@ dataframe = tibble(
 ## Problem 2
 
 The following code chunk creates the data frame as required.
-```{r}
+```{r create_normal_distribution}
 norm_distri = tibble(
   x = rnorm(1000),
   y = rnorm(1000),
-  x_plus_y_more_than0 = c(x[1:1000] + y[1:1000] > 0 )
+  x_plus_y_more_than0 = c(x[1:1000] + y[1:1000] > 0 ),
+  num_vec = as.numeric(x_plus_y_more_than0),
+  fac_vec = as.factor(x_plus_y_more_than0)
 )
-norm_distri$x_plus_y_more_than0
+```
+
+The size of the dataset is 
+
+The following code chunk creates the scatter plot of `x_plus_y_more_than0` in `norm_distri`
+```{r scatter_plot_logical}
+ggplot(norm_distri, aes(x = x, y = y, color = x_plus_y_more_than0)) + geom_point()
+```
+
+The following code chunk creates the scatter plot of `num_vec` in `norm_distri`
+```{r scatter_plot_numerical}
+ggplot(norm_distri, aes(x = x, y = y, color = num_vec)) + geom_point()
 ```
 
