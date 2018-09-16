@@ -18,8 +18,21 @@ The following code chunk creates the data frame as required.
 set.seed(100)
 dataframe = tibble(
   sample = runif(10, min = 0, max = 5),
-  morethan2 = c(sample[1:10] > 2)
+  morethan2 = c(sample[1:10] > 2),
+  p1_cha = c('a','b','c','d','e','f','g','h','i','j'),
+  p1_fac = factor(c(length = 10))
 )
+
+dataframe$p1_cha
+dataframe$p1_fac
+length(dataframe$p1_fac)
+```
+
+The following code chunk tries to convert logical/character/factor vectors to numerical vector.
+```{r convert, eval = FALSE}
+as.numeric(dataframe$morethan2)
+as.numeric(dataframe$p1_cha)
+as.numeric(dataframe$p1_fac)
 ```
 
 ## Problem 2
@@ -40,6 +53,7 @@ The size of the dataset is
 The following code chunk creates the scatter plot of `x_plus_y_more_than0` in `norm_distri`
 ```{r scatter_plot_logical}
 ggplot(norm_distri, aes(x = x, y = y, color = x_plus_y_more_than0)) + geom_point()
+ggsave("scatter_plot.pdf", height = 4, width = 6)
 ```
 
 The following code chunk creates the scatter plot of `num_vec` in `norm_distri`
@@ -47,3 +61,7 @@ The following code chunk creates the scatter plot of `num_vec` in `norm_distri`
 ggplot(norm_distri, aes(x = x, y = y, color = num_vec)) + geom_point()
 ```
 
+The following code chunk creates the scatter plot of `fac_vec` in `norm_distri`
+```{r scatter_plot_factor}
+ggplot(norm_distri, aes(x = x, y = y, color = fac_vec)) + geom_point()
+```
