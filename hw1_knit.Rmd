@@ -1,0 +1,23 @@
+---
+title: "Homework 1"
+author: "Jiawei Ye"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+```
+
+
+This is the first homework of P8105.
+
+The following code chunk creates the data frame as required. 
+```{r create_uniform_distribution}
+set.seed(100)
+dataframe = tibble(
+  sample = runif(10, min = 0, max = 5),
+  #morethan2 = c()
+  
+)
+```
+
