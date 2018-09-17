@@ -13,27 +13,43 @@ This is the first homework of P8105.
 
 ## Problem 1
 
-The following code chunk creates the data frame as required. 
+The following code chunk creates the data frame as required. It also calculates the mean of each variable in the dataframe.  
 ```{r create_uniform_distribution}
 set.seed(100)
 dataframe = tibble(
   sample = runif(10, min = 0, max = 5),
   morethan2 = c(sample[1:10] > 2),
-  p1_cha = c('a','b','c','d','e','f','g','h','i','j'),
-  p1_fac = factor(c(length = 10))
+  p1_cha = c('JohnyDepp','AlanRickman','Eddie','Benedict','Watson','f','g','h','i','SeverusSnape'),
+  p1_fac = factor(c('A','A','C','C','A','B','B','E','E','A'))
 )
-
-dataframe$p1_cha
-dataframe$p1_fac
-length(dataframe$p1_fac)
+mean(dataframe$sample)
+mean(dataframe$morethan2)
+mean(dataframe$p1_cha)
+mean(dataframe$p1_fac)
 ```
+The mean of `sample` and `morethan2` works, `p1_cha` and `p1_fac` do not work. Obviously you cannot calculate the mean of characters and factors. I think elements in `morethan2` are treated as zeros and ones so R can calculate its mean. 
 
-The following code chunk tries to convert logical/character/factor vectors to numerical vector.
-```{r convert, eval = FALSE}
+
+The following code chunk tries to convert logical/character/factor vectors to numerical vectorS.
+```{r convert_to_num, eval = FALSE}
 as.numeric(dataframe$morethan2)
 as.numeric(dataframe$p1_cha)
 as.numeric(dataframe$p1_fac)
 ```
+The logical vector can be converted to numbers, true = 1, false = 0. The character vector cannot. The factor vector was converted to numbers according to the elements' alphabetic order. When elements in factor vector are numbers, they are converted to the numbers accordingly.
+
+
+The following code chunk tries to convert vectors to other data types. 
+```{r convert_other_type}
+tmp1 = as.factor(dataframe$p1_cha)
+tmp1
+as.numeric(tmp1)
+
+tmp2 = as.character(dataframe$p1_fac)
+tmp2
+as.numeric(tmp2)
+```
+Characters can be converted into factors, but they are ordered alphabetically in levels. The characters are first sorted in alphabetic order and then converted to numbers accordingly. The factor can be converted to characters but cannot be converted to numeric type (the factors become NA in the numeric vector). But when the elements in factors are numbers in the first place, they can be converted to numbers. 
 
 ## Problem 2
 
